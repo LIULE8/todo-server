@@ -1,5 +1,9 @@
 package com.leo.model;
 
+
+import javax.persistence.*;
+
+@Entity
 public class Todo {
 
     private String id;
@@ -16,6 +20,8 @@ public class Todo {
     public Todo() {
     }
 
+    @Id
+    @Column(name = "id")
     public String getId() {
         return id;
     }
@@ -24,6 +30,7 @@ public class Todo {
         this.id = id;
     }
 
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -32,6 +39,7 @@ public class Todo {
         this.name = name;
     }
 
+    @Column(name = "complete")
     public boolean getComplete() {
         return complete;
     }
