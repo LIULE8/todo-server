@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -17,13 +18,16 @@ public class TodoListController {
     @Autowired
     private TodoRepository repository;
 
+
     @GetMapping("/todo/showAll")
     public List<Todo> showAll() {
         return repository.findAll();
     }
 
     @PostMapping("/todo/add")
-    public String addTodo(Todo todo) {
+//    public String addTodo(String id, String name, boolean complete) {
+    public String addTodo(@RequestBody Todo todo) {
+//        Todo todo = new Todo(id, name, complete);
         if (!checkTodo(todo)) {
             return "add todo fail";
         }
@@ -31,8 +35,9 @@ public class TodoListController {
         return "add todo success";
     }
 
+
     @PutMapping("/todo/update/{id}")
-    public String updateTodo(@PathVariable("id") String id, Todo todo) {
+    public String updateTodo(@PathVariable("id") String id, @RequestBody Todo todo) {
         if (!StringUtils.isNotBlank(id)) {
             return "update todo fail";
         }
@@ -44,7 +49,7 @@ public class TodoListController {
     @DeleteMapping("/todo/delete/{id}")
     public String deleteTodo(@PathVariable("id") String id) {
         if (!StringUtils.isNotBlank(id)) {
-            return "update todo fail";
+            return "delete todo fail";
         }
         try {
             Todo todo = repository.getOne(id);
