@@ -3,6 +3,9 @@ package com.leo.model;
 
 import javax.persistence.*;
 
+/**
+ * @author LIULE9
+ */
 @Entity
 public class Todo {
 

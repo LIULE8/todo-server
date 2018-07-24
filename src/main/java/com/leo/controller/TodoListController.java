@@ -6,7 +6,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -25,9 +24,7 @@ public class TodoListController {
     }
 
     @PostMapping("/todo/add")
-//    public String addTodo(String id, String name, boolean complete) {
     public String addTodo(@RequestBody Todo todo) {
-//        Todo todo = new Todo(id, name, complete);
         if (!checkTodo(todo)) {
             return "add todo fail";
         }
