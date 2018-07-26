@@ -12,18 +12,19 @@ import java.util.List;
  * @author LIULE9
  */
 @RestController
+@RequestMapping("/todos")
 public class TodoListController {
 
     @Autowired
     private TodoRepository repository;
 
 
-    @GetMapping("/todo/showAll")
+    @GetMapping
     public List<Todo> showAll() {
         return repository.findAll();
     }
 
-    @PostMapping("/todo/add")
+    @PostMapping
     public String addTodo(@RequestBody Todo todo) {
         if (!checkTodo(todo)) {
             return "add todo fail";
@@ -33,7 +34,7 @@ public class TodoListController {
     }
 
 
-    @PutMapping("/todo/update/{id}")
+    @PutMapping("/{id}")
     public String updateTodo(@PathVariable("id") String id, @RequestBody Todo todo) {
         if (!StringUtils.isNotBlank(id)) {
             return "update todo fail";
@@ -43,7 +44,7 @@ public class TodoListController {
     }
 
 
-    @DeleteMapping("/todo/delete/{id}")
+    @DeleteMapping("/{id}")
     public String deleteTodo(@PathVariable("id") String id) {
         if (!StringUtils.isNotBlank(id)) {
             return "delete todo fail";
